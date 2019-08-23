@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Navbar from './Navbar';
-// import SideDrawer from './SideDrawer';
-// import Backdrop from './backdrop/Backdrop';
+import SideDrawer from './SideDrawer';
+import Backdrop from './Backdrop';
 
 // import '../../Index.css';
 

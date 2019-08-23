@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 // import "./Register.css"
 import { connect } from 'react-redux';
-import { getToken } from "../../actions/authAction";
+import { getToken } from "../../actions/authActions";
 
 class Register extends Component{
     constructor(props){

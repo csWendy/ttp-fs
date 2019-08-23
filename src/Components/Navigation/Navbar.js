@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import ToggleButton from './ToggleButton';
-// import { delToken } from "../../actions/authAction";
+import { delToken } from "../../actions/authActions";
 
 // import "../Navigation/Navbar.css";
 

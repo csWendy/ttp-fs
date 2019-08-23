@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'aos/dist/aos.css';
+// import 'aos/dist/aos.css';
 // import "../Categories/Categories.css";
 
 
