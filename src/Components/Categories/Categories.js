@@ -15,9 +15,8 @@ class Categories extends Component{
         return(
             <div className="categories_section">
                 <section className="step2" >
-                    <input className="categoriesBtn" type="button" value="Cake" onClick={this.handleCategory} ></input>
-                    <input className="categoriesBtn" type="button" value="Cookies" onClick={this.handleCategory}></input>
-                    <input className="categoriesBtn" type="button" value="Bread" onClick={this.handleCategory}></input>
+                    <input className="categoriesBtn" type="button" value="Portfolio" onClick={this.handleCategory} ></input>
+                    <input className="categoriesBtn" type="button" value="Transactions" onClick={this.handleCategory}></input>
                 </section>
             </div>
         )

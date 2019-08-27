@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Categories from '../Categories/Categories';
 
-// import "../Landing/Landing.css";
+import "../Landing/Landing.css";
 
 class Landing extends Component{
     constructor (props){
@@ -38,7 +38,7 @@ class Landing extends Component{
                     <button onClick={this.handleClick}> Welcome to Treasure Island </button>
                 </div>
 
-                <div className=" categoriesLanding" ref={this.CategorySection}>
+                <div className="categoriesLanding" ref={this.CategorySection}>
                     <h3> Try a new stock today!</h3>
                     <hr />
                     <Categories categoryChange={this.categoryChange}/>

@@ -8,7 +8,6 @@ class Register extends Component{
     constructor(props){
         super(props);
         this.state ={
-            name:"",
             email:"",
             password:"",
             success:false
@@ -31,10 +30,6 @@ class Register extends Component{
                 <form className = "registerForm">
                     <h1 >Register</h1>
                     <hr />
-                    <div className="input-field">
-                        <label className="name">name</label>
-                        <input type="name" id="name" onChange={this.handleUserInput} />
-                    </div>
                     <div className="input-field">
                         <label className="email">email</label>
                         <input type="email" id="email" onChange={this.handleUserInput} />
