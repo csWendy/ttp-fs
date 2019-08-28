@@ -64,3 +64,55 @@ app.post('/api/v1/register', jsonParser, (req, res) => {
             res.json(error)
         })
 });
+
+//Sign In with email and password 
+app.post('/api/v1/signin', jsonParser, (req, res) => {
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        .then((userRecord) => {
+            firebase.auth().currentUser.getIdToken(true)
+                .then(token => {
+                    firestore.collection('users').doc(userRecord.user.uid).get()
+                        .then(doc => {
+                            response = {
+                                success: true,
+                                accessToken: token,
+                                email: doc.data().email,
+                                firstname: doc.data().firstname,
+                                lastname: doc.data().lastname,
+                                username: doc.data().username,
+                                status: 200,
+                                message: `User: ${doc.data().username} successfully signed in`
+                            }
+                            res.json(response)
+                        })
+                        .catch(error => {
+                            res.json(error)
+                        })
+                })
+                .catch(error => {
+                    res.json(error)
+                })
+        })
+        .catch((error) => {
+            res.json(error)
+        })
+});
+
+
+//signout
+app.post('/api/v1/signout', (req, res) => {
+    firebase.auth().signOut()
+        .then(() => {
+            // Sign-out successful.
+            response = {
+                success: true,
+                status: 200,
+                message: "signed out"
+            }
+            res.json(response)
+        }).catch((error) => {
+            // An error happened.
+            console.log("Error signing out", error)
+            res.json(error)
+        })
+});
