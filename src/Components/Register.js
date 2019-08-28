@@ -10,7 +10,9 @@ class Register extends Component{
         this.state ={
             email:"",
             password:"",
-            success:false
+            success:false,
+            visible: true,
+            showError: false
         }
         this.handleSubmit = this.handleSubmid.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
@@ -20,32 +22,87 @@ class Register extends Component{
         this.setState({[event.target.name]:event.target.value});
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log("Signing Up")
+        axios.post("api/v1/register", {
+            email: this.state.email,
+            password: this.state.password
+        })
+            .then(response => {
+                console.log(response);
+                if (response.data.success) {
+                    this.props.getToken(response.data);
+                    this.setState({
+                        success: response.data.success,
+                        accessToken: response.data.accessToken,
+                        message: response.data.message
+                    })
+                    this.props.history.push('/')
+                }
+                else {
+                    this.setState(
+                        {
+                            success: response.data.success,
+                            message: response.data.message
+                        }
+                    )
+                }
+            })
+            .catch(function (error) {
+                console.log("Authorization failed: " + error.message);
 
+
+            })
     }
 
-    render(){
-        return(
-            <div className="container">
-                <form className = "registerForm">
-                    <h1 >Register</h1>
-                    <hr />
-                    <div className="input-field">
-                        <label className="email">email</label>
-                        <input type="email" id="email" onChange={this.handleUserInput} />
-                    </div>
-                    <div className="input-field">
-                        <label className="password">password</label>
-                        <input type="password" id="password" onChange={this.handleUserInput}/>
-                    </div>
-                    <div className="input-field">
-                        <button className ="btn gray lighten-1 z-depth-0"> Register </button>
-                    </div>                    
-                </form>
+    render() {
+        return (
+            <div>
+                <div className="loginWrapper">
+                    <form className="registerForm" >
+                        <h1>Register</h1>
+                        <hr />
+                        <div className="eachDiv">
+                            <label className="allLabels">First Name:</label>
+                            <input className="allInputs" type="text" name="firstname" required={true} onChange={this.handleUserInput} />
+                        </div>
+                        <div className="eachDiv">
+                            <label className="allLabels">Last Name:</label>
+                            <input className="allInputs" type="text" name="lastname" required={true} onChange={this.handleUserInput} />
+                        </div>
+                        <div className="eachDiv">
+                            <label className="allLabels">User Name:</label>
+                            <input className="allInputs" type="text" name="username" required={true} onChange={this.handleUserInput} />
+                        </div>
+                        <div className="eachDiv">
+                            <label className="allLabels">Email:</label>
+                            <input className="allInputs" type="text" name="email" required={true} onChange={this.handleUserInput} />
+                        </div >
+                        <div className="eachDiv">
+                            <label className="allLabels">Password:</label>
+                            <input className="allInputs" type="password" name="password" required={true} onChange={this.handleUserInput} />
+                        </div>
+                        <div className="eachDiv">
+                            <label className="allLabels">Verify Password:</label>
+                            <input className="allInputs" type="password" name="verify_password" required={true} onChange={this.handleUserInput} onKeyUp={this.verifyPassword.bind(this)} />
+                        </div>
+                        <div>
+                            <input className="message-box" id="message" disabled={true} readOnly={true} value={this.state.message} size="30" />
+                        </div>
+                        {this.state.showError && (<input className="message-box" id="message" disabled={true} readOnly={true} value={this.state.verify} size="30" />)}
+                        <br />
+                        <button className="submitButtonRegister" type="submit" disabled={this.state.visible} onClick={this.handleSubmit.bind(this)}>Register</button>
+                    </form>
+                </div>
             </div>
-
         );
     }
 }
 
-export default Register;
+const mapStateToProps = (state) => {
+    return {
+        accessToken: state.auth.accessToken
+    }
+}
+export default connect(mapStateToProps, { getToken })(Register);
