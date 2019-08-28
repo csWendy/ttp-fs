@@ -14,7 +14,7 @@ class Register extends Component{
             visible: true,
             showError: false
         }
-        this.handleSubmit = this.handleSubmid.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
     }
 
@@ -24,7 +24,7 @@ class Register extends Component{
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log("Signing Up")
+        console.log("Register")
         axios.post("api/v1/register", {
             email: this.state.email,
             password: this.state.password
@@ -64,28 +64,12 @@ class Register extends Component{
                         <h1>Register</h1>
                         <hr />
                         <div className="eachDiv">
-                            <label className="allLabels">First Name:</label>
-                            <input className="allInputs" type="text" name="firstname" required={true} onChange={this.handleUserInput} />
-                        </div>
-                        <div className="eachDiv">
-                            <label className="allLabels">Last Name:</label>
-                            <input className="allInputs" type="text" name="lastname" required={true} onChange={this.handleUserInput} />
-                        </div>
-                        <div className="eachDiv">
-                            <label className="allLabels">User Name:</label>
-                            <input className="allInputs" type="text" name="username" required={true} onChange={this.handleUserInput} />
-                        </div>
-                        <div className="eachDiv">
                             <label className="allLabels">Email:</label>
                             <input className="allInputs" type="text" name="email" required={true} onChange={this.handleUserInput} />
                         </div >
                         <div className="eachDiv">
                             <label className="allLabels">Password:</label>
                             <input className="allInputs" type="password" name="password" required={true} onChange={this.handleUserInput} />
-                        </div>
-                        <div className="eachDiv">
-                            <label className="allLabels">Verify Password:</label>
-                            <input className="allInputs" type="password" name="verify_password" required={true} onChange={this.handleUserInput} onKeyUp={this.verifyPassword.bind(this)} />
                         </div>
                         <div>
                             <input className="message-box" id="message" disabled={true} readOnly={true} value={this.state.message} size="30" />
