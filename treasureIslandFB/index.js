@@ -65,7 +65,7 @@ app.post('/api/v1/register', jsonParser, (req, res) => {
         })
 });
 
-//Sign In with email and password 
+//Login with email and password 
 app.post('/api/v1/signin', jsonParser, (req, res) => {
     firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
         .then((userRecord) => {
@@ -99,7 +99,7 @@ app.post('/api/v1/signin', jsonParser, (req, res) => {
 });
 
 
-//signout
+//Logout
 app.post('/api/v1/signout', (req, res) => {
     firebase.auth().signOut()
         .then(() => {
